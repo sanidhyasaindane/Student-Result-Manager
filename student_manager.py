@@ -32,14 +32,25 @@ def search_stud():
     if not found:
         print("Student not found!!")
 def del_stud():
-    dele = input("Enter name of the student to delete data: ")
+    dele = input("Enter name of the student to delete: ")
+    found = False
     for student in students:
         if dele == student["Name"]:
             students.remove(student)
+            save_students()
             print("Deleted Successfully!!")
-        else:
-            print("Enter a valid name!!")
+            found = True
+            break
+    if not found:
+        print("Student not found!!")
     save_students()
+def upd_stud():
+    stud = input("Enter name of the student to update marks: ")
+    for student in students:
+        if stud == student["Name"]:
+            upd_mks = input("Enter new marks: ")
+            student["Marks"] = upd_mks
+            print("Marks updated successfully!") 
 load_students()
 while True:
     print("STUDENT RESULT MANAGER")
@@ -47,7 +58,8 @@ while True:
     print("2. View Students")
     print("3. Search student")
     print("4. Delete Student")
-    print("5. Exit")
+    print("5. Update Marks")
+    print("6. Exit")
     choice = int(input("Enter your choice: "))
     if choice == 1:
         add_stud()
@@ -69,6 +81,8 @@ while True:
         del_stud()
 
     elif choice == 5:
+        upd_stud()
+    elif choice == 6:
         print("Exited successfully!")
         break
     else:
